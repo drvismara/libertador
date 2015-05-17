@@ -1,0 +1,17 @@
+total 60
+drwxrwxr-x 2 avismara avismara 4096 may 14 17:46 bin
+-rw-rw-rw- 1 avismara avismara 1793 may 14 14:57 Chameleon.cc
+-rw-rw-rw- 1 avismara avismara 1475 may 14 13:10 Chameleon.h
+-rw-rw-rw- 1 avismara avismara 3217 may 14 17:46 ClientThread.cc
+-rw-rw-rw- 1 avismara avismara  294 may 14 17:40 ClientThread.h
+-rwxrwxr-x 1 avismara avismara  565 may 14 16:16 compile.sh
+-rw-rw-rw- 1 avismara avismara 1882 may 14 17:14 ConfigFile.cc
+-rw-rw-rw- 1 avismara avismara  539 may 14 14:57 ConfigFile.h
+drwxrwxr-x 2 avismara avismara 4096 may 14 13:12 log
+-rw-rw-rw- 1 avismara avismara  287 may 14 15:51 main.cc
+drwxrwxr-x 2 avismara avismara 4096 may 14 17:46 obj
+-rw-rw-r-- 1 avismara avismara    0 may 14 17:48 salida.txt
+-rw-rw-r-- 1 avismara avismara   59 may 14 16:12 silver_bullet.conf
+-rw-rw-rw- 1 avismara avismara 1724 may 14 16:47 SilverBulletServer.cc
+-rw-rw-rw- 1 avismara avismara  494 may 14 17:05 SilverBulletServer.h
+drwxrwxr-x 2 avismara avismara 4096 may 14 13:12 tmp
