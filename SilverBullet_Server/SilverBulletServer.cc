@@ -4,8 +4,8 @@
 #include <thread>
 #include <map>
 
-#include <SilverBulletServer.h>
-#include <KeyMaintainer.h>
+#include "SilverBulletServer.h"
+#include "KeyMaintainer.h"
 
 SilverBulletServer::SilverBulletServer(ConfigFile* cnf)
 {
@@ -36,7 +36,7 @@ int SilverBulletServer::startServer()
     {
         throw std::runtime_error("SilverBulletServer::startServer: ERROR socket().");
     }
-    
+
     std::cout << "Socket created" << std::endl;
 
     server.sin_family = AF_INET;
@@ -78,13 +78,14 @@ int SilverBulletServer::stopServer()
     std::thread* thrKeyMaintainer;
 
     thrKeyMaintainer->join();
-}
 
+    return 0;
+}
 
 void SilverBulletServer::startKeyMaintainerProcess()
 {
     std::cout << "SilverBulletServer::startKeyMaintainerProcess" << std::endl;
-    
+
     std::string* listSection = sConf->getSections();
 
     std::cout << "SilverBulletServer::startKeyMaintainerProcess | getSections() " << std::endl;
@@ -120,12 +121,17 @@ void SilverBulletServer::startKeyMaintainerProcess()
 
         KeyMaintainer* km = new KeyMaintainer(mapName, mapMapper, mapFrm, mapKeyLoad);
 
+        std::string envName = "SB_KEY_MSG_" + mapName;
+        std::string envData = "SB_KEY_DATA_" + mapName;
+        setenv(envName.c_str(), "MSG_DEACTIVE", 1);
+        setenv(envData.c_str(), "NOTHING", 1);
+
         std::cout << "SilverBulletServer::startKeyMaintainerProcess | KeyMaintainer creado... " << std::endl;
 
         keyMaint.insert( std::pair<std::string, KeyMaintainer>(mapName, (*km) ) );
 
         //keyMaint[mapName] = (*km);
-        
+
         thr_cli[i] = new std::thread((*km), mapName.c_str());
         //thr_cli[i]->join();
 

@@ -1,0 +1,74 @@
+# depslib dependency file v1.0
+1431874410 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/Chameleon.cc
+	<string>
+	<sstream>
+	"Chameleon.h"
+	<iostream>
+
+1431619829 /home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/Chameleon.h
+	<string>
+
+1431876365 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/ClientThread.cc
+	<iostream>
+	<map>
+	<string>
+	<cstdio>
+	<cstring>
+	<cstdlib>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	"ClientThread.h"
+	"KeyMaintainer.h"
+
+1431874624 /home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/ClientThread.h
+	<map>
+	"KeyMaintainer.h"
+
+1431710914 /home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/KeyMaintainer.h
+
+1431874569 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/ConfigFile.cc
+	<iostream>
+	<fstream>
+	"ConfigFile.h"
+
+1431874691 /home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/ConfigFile.h
+	<string>
+	<map>
+	"Chameleon.h"
+
+1431874585 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/KeyMaintainer.cc
+	<iostream>
+	<cstdio>
+	<cstring>
+	<cstdlib>
+	<ctime>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	"KeyMaintainer.h"
+
+1431874597 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/main.cc
+	<iostream>
+	<thread>
+	"ConfigFile.h"
+	"SilverBulletServer.h"
+
+1431874714 /home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/SilverBulletServer.h
+	<cstdio>
+	<cstring>
+	<cstdlib>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<unistd.h>
+	"ConfigFile.h"
+	"ClientThread.h"
+	"KeyMaintainer.h"
+
+1431874611 source:/home/d4rkcore/soft/Labs/Libertador/SilverBullet_Server/SilverBulletServer.cc
+	<iostream>
+	<thread>
+	<map>
+	"SilverBulletServer.h"
+	"KeyMaintainer.h"
+

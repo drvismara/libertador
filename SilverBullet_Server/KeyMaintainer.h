@@ -13,16 +13,22 @@
 #define OP_OK 0
 #define OP_NOK 1
 
+#include <mutex>
+#include <thread>
+
 class KeyMaintainer
 {
 	// cada 1Hs forzara el update completo de archivos.
 
 public:
 	KeyMaintainer(std::string mapName,  std::string mapMapper, std::string mapFrm, int mapKeyLoad);
-
 	void operator()(const char* msg);
 
-	void messenger(std::string cmd, std::string resp);
+    KeyMaintainer(KeyMaintainer&& other);
+    KeyMaintainer(const KeyMaintainer& other);
+
+    KeyMaintainer& operator = (KeyMaintainer&& other);
+    KeyMaintainer& operator = (const KeyMaintainer& other);
 
 private:
 	std::string name;
@@ -36,7 +42,11 @@ private:
 
 	std::string in_msg;
 	std::string out_msg;
-	int msgFlag;
+
+	mutable std::mutex varMtx;
+
+    int getEnvMessage();
+    int putEnvMessage(int msg);
 
 	int checkNews();
 	int doUpdate();

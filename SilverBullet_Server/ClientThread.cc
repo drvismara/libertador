@@ -9,10 +9,8 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#include <ClientThread.h>
-#include <KeyMaintainer.h>
-
-#include <silver_common.h>
+#include "ClientThread.h"
+#include "KeyMaintainer.h"
 
 ClientThread::ClientThread(int client_sock, std::map<std::string, KeyMaintainer>* kmp)
 {
@@ -30,20 +28,20 @@ void ClientThread::operator()(const char* msg)
     char *message , client_message[2000];
 
     memset(client_message, '\0', 2000);
-    
+
     std::cout << "Operator() del cliente: " << msg << std::endl;
 
     //Send some messages to the client
     message = "Greetings! I am your connection handler\n";
     write(clientSocket , message , strlen(message));
-     
+
     message = "Now type something and i shall repeat what you type \n";
     write(clientSocket , message , strlen(message));
-    
+
     while( (read_size = recv(clientSocket , client_message , 2000 , 0)) > 0 )
     {
 		client_message[read_size-2] = '\0';
-        
+
         std::cout << "DATA recv() " << client_message << std::endl;
 
         processRequest2(client_message);
@@ -54,7 +52,7 @@ void ClientThread::operator()(const char* msg)
 		memset(client_message, 0, 2000);
 		answer->erase();
     }
-    
+
     if(read_size == 0)
     {
         puts("Client disconnected");
@@ -70,11 +68,10 @@ void ClientThread::processRequest2(const char* req)
     int posEqual;
     std::string mName;
     std::string comd;
-    std::string comd_resp("");
 
-    std::map<std::string, KeyMaintainer>::iterator it;
+    //std::map<std::string, KeyMaintainer>::iterator it;
 
-    posEqual=request.find(';');
+    posEqual=request.find(':');
 
     mName = request.substr(0,posEqual);
     comd = request.substr(posEqual+1);
@@ -82,19 +79,29 @@ void ClientThread::processRequest2(const char* req)
     std::cout << "MAPPER: " << mName << std::endl;
     std::cout << "COMMAND: " << comd << std::endl;
 
-    it = keyMap->find(mName);
-    (*it).second.messenger(comd, comd_resp);
+    std::string envName = "SB_KEY_MSG_" + mName;
+    std::string envData = "SB_KEY_DATA_" + mName;
 
-    std::cout << "ANSWER: " << comd_resp << std::endl;
+    setenv(envData.c_str(), "CHECK", 1);
+    setenv(envName.c_str(), "MSG_ACTIVE", 1);
+
+    std::string SB_KEY_MSG = getenv(envName.c_str());
+    while (SB_KEY_MSG.compare("MSG_SENT") != 0)
+    {
+        SB_KEY_MSG.clear();
+        SB_KEY_MSG = getenv(envName.c_str());
+    }
+
+    std::string SB_KEY_DATA = getenv(envData.c_str());
+    SB_KEY_DATA += "\n";
+    write(clientSocket , SB_KEY_DATA.c_str(), SB_KEY_DATA.size());
+
+    //it = keyMap->find(mName);
+    //(*it).second.messenger(comd, comd_resp);
+
+    std::cout << "ANSWER: " << SB_KEY_DATA << std::endl;
 
     //(*keyMap)[mName].messenger(comd, comd_resp);
-
-    if (request.compare("CHECK\0") == 0)
-    {
-        std::cout << "Entro " << std::endl;
-    } else{
-        std::cout << "No entro #" << request << "#" << std::endl;
-    }
 }
 
 void ClientThread::processRequest(const char* req)

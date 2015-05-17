@@ -1,4 +1,4 @@
-/* 
+/*
    Chameleon.cpp
 
    Copyright (C) 2002-2004 René Nyffenegger
@@ -27,7 +27,7 @@
 #include <string>
 #include <sstream>
 
-#include <Chameleon.h>
+#include "Chameleon.h"
 
 Chameleon::Chameleon(std::string const& value) {
   value_=value;

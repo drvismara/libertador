@@ -1,8 +1,8 @@
 #include <iostream>
 #include <thread>
 
-#include <ConfigFile.h>
-#include <SilverBulletServer.h>
+#include "ConfigFile.h"
+#include "SilverBulletServer.h"
 
 int main(int argc, char** argv)
 {

@@ -4,10 +4,10 @@
 #include <string>
 #include <map>
 
-#include <Chameleon.h>
+#include "Chameleon.h"
 
 class ConfigFile {
-  
+
   std::map<std::string, std::string> section_;
   std::map<std::string,Chameleon> content_;
 

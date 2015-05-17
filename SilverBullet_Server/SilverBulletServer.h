@@ -8,9 +8,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#include <ConfigFile.h>
-#include <ClientThread.h>
-#include <KeyMaintainer.h>
+#include "ConfigFile.h"
+#include "ClientThread.h"
+#include "KeyMaintainer.h"
 
 //namespace Libertador {
 class SilverBulletServer
@@ -22,7 +22,7 @@ public:
 	int stopServer();
 
 	void startKeyMaintainerProcess();
-	
+
 private:
 	int max_client;
 	int listen_port;
